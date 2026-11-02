@@ -1,129 +1,318 @@
+/* ─────────────────────────────────────────
+   THEME VARIABLES — Blue & White
+   ───────────────────────────────────────── */
 :root {
-  --bg: #f3f4f6;
-  --card-bg: #ffffff;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --accent: #6366f1;
-  --border: #e5e7eb;
+  --bg:           #eef4fb;      /* soft blue-white background */
+  --card-bg:      #ffffff;
+  --text:         #0f2a44;      /* deep navy */
+  --muted:        #5a7184;      /* blue-grey */
+  --accent:       #2563eb;      /* primary blue */
+  --accent-dark:  #1d4ed8;      /* hover blue */
+  --accent-soft:  #dbeafe;      /* pale blue chip */
+  --border:       #d6e4f0;
+  --shadow-sm:    0 2px 6px rgba(15, 42, 68, 0.06);
+  --shadow-md:    0 8px 24px rgba(15, 42, 68, 0.10);
+  --shadow-lg:    0 20px 44px rgba(15, 42, 68, 0.14);
+  --radius:       18px;
+  --gap-section:  1.6rem;
 }
 
+/* Optional dark mode — same blue accents, darker canvas */
 body.dark {
-  --bg: #111827;
-  --card-bg: #1f2937;
-  --text: #f9fafb;
-  --muted: #9ca3af;
-  --accent: #818cf8;
-  --border: #374151;
+  --bg:           #0b1727;
+  --card-bg:      #12243a;
+  --text:         #e6f0fb;
+  --muted:        #93a9bd;
+  --accent:       #60a5fa;
+  --accent-dark:  #3b82f6;
+  --accent-soft:  #1e3a5f;
+  --border:       #1f3a56;
+  --shadow-sm:    0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-md:    0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg:    0 20px 44px rgba(0, 0, 0, 0.55);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ─────────────────────────────────────────
+   RESET & BASE
+   ───────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   min-height: 100vh;
   display: grid;
   place-items: center;
+  padding: 1.25rem;
   background: var(--bg);
   color: var(--text);
-  font-family: system-ui, sans-serif;
-  padding: 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
   transition: background 0.3s, color 0.3s;
 }
 
+/* ─────────────────────────────────────────
+   MAIN CARD
+   ───────────────────────────────────────── */
 .card {
+  width: 100%;
+  max-width: 560px;                 /* roomier than before */
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 480px;
-  width: 100%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius);
+  padding: 2.4rem 2rem;
+  box-shadow: var(--shadow-lg);
+  transition: background 0.3s, border-color 0.3s;
 }
 
+/* ─────────────────────────────────────────
+   PROFILE HEADER — larger, centered
+   ───────────────────────────────────────── */
 .card-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.8rem;
+  margin-bottom: var(--gap-section);
+  border-bottom: 1px solid var(--border);
+}
+
+.avatar-wrapper {
+  display: inline-flex;
+  padding: 5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+}
+
+.avatar-wrapper:hover {
+  transform: scale(1.04);
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  border: 4px solid var(--accent);
   object-fit: cover;
+  object-position: center top;
+  background: #ffffff;
+  display: block;
 }
 
-.card-header h1 { margin-top: 0.75rem; font-size: 1.5rem; }
+.name {
+  margin-top: 1.1rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
 
 .role {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.section { margin-bottom: 1.5rem; }
-
-.section h2 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.98rem;
   color: var(--accent);
+  font-weight: 600;
+  margin-top: 0.25rem;
 }
 
+.institution {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* ─────────────────────────────────────────
+   SECTIONS — consistent spacing
+   ───────────────────────────────────────── */
+.section {
+  margin-bottom: var(--gap-section);
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--accent);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--accent-soft);
+}
+
+.section-text {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────
+   SKILLS — pill chips
+   ───────────────────────────────────────── */
 .skills {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  list-style: none;
 }
 
 .skills li {
-  background: var(--accent);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
   font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.skills li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─────────────────────────────────────────
+   PROJECTS — cards with soft shadows
+   ───────────────────────────────────────── */
 .projects {
   display: grid;
-  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
 }
 
 .project {
+  background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 0.75rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+              border-color 0.25s ease;
 }
 
-.project h3 { font-size: 0.95rem; margin-bottom: 0.25rem; }
-.project p { color: var(--muted); font-size: 0.85rem; }
+.project:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-left-color: var(--accent-dark);
+}
 
+.project h3 {
+  font-size: 0.98rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.project p {
+  font-size: 0.87rem;
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────
+   CONTACT + BUTTONS — smooth hover
+   ───────────────────────────────────────── */
 .contact {
   display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  flex-wrap: wrap;
 }
 
 .btn {
-  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   padding: 0.75rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   border: none;
   border-radius: 10px;
-  background: var(--accent);
-  color: white;
-  font-size: 0.9rem;
   cursor: pointer;
-  text-align: center;
   text-decoration: none;
-  transition: transform 0.15s, opacity 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+              background 0.2s ease;
 }
 
-.btn:hover { transform: translateY(-2px); opacity: 0.9; }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--accent-dark), #1e40af);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
 
 .btn.ghost {
   background: transparent;
-  border: 2px solid var(--accent);
   color: var(--accent);
+  border: 2px solid var(--accent);
+  box-shadow: none;
 }
 
-@media (min-width: 600px) {
-  .projects { grid-template-columns: 1fr 1fr; }
+.btn.ghost:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — tablets & laptops
+   ───────────────────────────────────────── */
+@media (min-width: 640px) {
+  .card {
+    max-width: 640px;
+    padding: 2.8rem 2.6rem;
+  }
+
+  .projects {
+    grid-template-columns: 1fr 1fr;   /* 2-column project grid */
+  }
+
+  .contact {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .contact-buttons {
+    flex: 2;
+    flex-direction: row;
+  }
+
+  .contact .btn {
+    width: auto;
+    flex: 1;
+  }
+
+  .contact .btn.ghost {
+    flex: 0 0 auto;
+    padding-inline: 1.2rem;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — small phones
+   ───────────────────────────────────────── */
+@media (max-width: 400px) {
+  .card {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .name {
+    font-size: 1.45rem;
+  }
 }
